@@ -1,0 +1,5 @@
+IFBot was created by Greg Nagel.
+
+It is based on code for Meldrew <http://icculus.org/meldrew/>
+
+And takes the URI addressing idea from Dave Risney's Web Frotz Interpreter <http://deletethis.net/dave/if/>
