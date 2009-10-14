@@ -183,25 +183,26 @@ class InteractiveBot(SingleServerIRCBot):
             if length == 0:
                 c.notice(nick, "The specified game URI '{uri}' returned "
                     "no data.".format(uri=uri))
-                return
+                return False
             elif length > self.maxsize:
                 c.notice(nick, "The specified game '{uri}' is too large; "
                     "{actual}KiB when the max is {max}KiB.".format(
                     uri=uri, actual=length/1024, max=self.maxsize/1024))
-                return
+                return False
         #elif request.get_type() == 'ftp':
         #    pass
         else:
             c.notice(nick, "The specified game URI {uri} has "
                 "a disallowed scheme {scheme}.".format(
                     uri=uri, scheme=request.type))
-            return
+            return False
         
         unused, headers = urllib.urlretrieve(uri, localpath)
         #if headers.status < 200 or headers.status >= 300:
         #    c.notice(nick, "The specified game URI '{uri}' returned "
         #        "status code {code}.".format(uri=uri, code=head.status))
         #    return
+        return True
     
     def do_command(self, e, cmd):
         nick = nm_to_n(e.source())
@@ -260,8 +261,8 @@ class InteractiveBot(SingleServerIRCBot):
                     pass
                 
                 try:
-                    file = self.download_game(nick, game, gamepath)
-                    if file is None:
+                    success = self.download_game(nick, game, gamepath)
+                    if not success:
                         return
                 except Exception:
                     print("Exception occurred during download.")
