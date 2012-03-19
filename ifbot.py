@@ -276,6 +276,7 @@ class InteractiveBot(SingleServerIRCBot):
             
             unused, gamename = os.path.split(gamepath)
             command = terp.format(file=gamename)
+            command = command.split(' ')
             try:
                 self.process = subprocess.Popen(command, bufsize=0,
                     stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
