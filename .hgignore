@@ -1,4 +1,0 @@
-glob:games/*
-glob:*.pyc
-glob:*.exe
-glob:ifbot.cfg
