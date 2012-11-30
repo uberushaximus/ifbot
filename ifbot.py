@@ -140,7 +140,6 @@ class InteractiveBot(SingleServerIRCBot):
     def on_welcome(self, c, e):
         if self.immediate_join:
             c.join(self.channel)
-            c.privmsg(self.channel, "Helloooooooooooooooooo!")
 
     def on_privmsg(self, c, e):
         nick = nm_to_n(e.source())
